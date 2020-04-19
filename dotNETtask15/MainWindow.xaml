@@ -18,7 +18,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" HorizontalAlignment="Left" Background="White" BorderBrush="Black">
             <MenuItem Header="_File">
-                <MenuItem Header="Открыть" Command="ApplicationCommands.Open"/>
+                <MenuItem Command="ApplicationCommands.Open"/>
                 <MenuItem Command="ApplicationCommands.Save"/>
                 <MenuItem Command="ApplicationCommands.SaveAs"/>
                 <Separator/>
@@ -28,6 +28,7 @@
                 <MenuItem Command="ApplicationCommands.Undo"/>
                 <MenuItem Command="ApplicationCommands.Redo"/>
                 <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.SelectAll"/>
                 <MenuItem Command="ApplicationCommands.Copy"/>
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
@@ -62,7 +63,8 @@
                      Name="txtData" FontSize="14"
                      BorderBrush="Blue"
                      VerticalScrollBarVisibility="Auto"
-                     HorizontalScrollBarVisibility="Auto">
+                     HorizontalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap">
             </TextBox>
         </Grid>
     </DockPanel>
