@@ -25,6 +25,22 @@ namespace dotNETtask15
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string msg = "Do you want to save file?";
+            MessageBoxResult result = MessageBox.Show(msg, "Save?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                SaveCommandBinding_Executed(sender, null);
+            }
+            if (result == MessageBoxResult.No)
+            {
+               
+            }
+            e.Cancel = (result == MessageBoxResult.Cancel);
         }
 
         private void menuExit_Click(object sender, RoutedEventArgs e)
@@ -38,19 +54,16 @@ namespace dotNETtask15
         }
 
         private void chbSpelling_Click(object sender, RoutedEventArgs e)
-        {
-            string hints = string.Empty;
-            SpellingError error = txtData?.GetSpellingError(txtData.CaretIndex);
-            if (error != null)
+        { 
+            if (chbSpelling.IsChecked == true)
             {
-                foreach (string s in error.Suggestions)
-                {
-                    hints += $"{s}\n";
-                }
+               
+                txtData.SpellCheck.IsEnabled = true;
             }
-
-
-            lblSpellingHints.Content = hints;
+            else
+            {
+                txtData.SpellCheck.IsEnabled = false;
+            }
         }
 
         private void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -80,6 +93,16 @@ namespace dotNETtask15
         }
 
         private void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ExitCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();  
+        }
+
+        private void ExitCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
